@@ -6,8 +6,6 @@
 \usepackage{multicol}
 \usepackage{xltxtra}
 \usepackage{xcolor} % Pour la couleur de fond
-\usepackage{tikz}   % Pour les bordures et les formes
-\usetikzlibrary{calc}
 
 \pagestyle{empty}
 \setlength\parindent{0pt}
@@ -23,13 +21,6 @@
     bottom=0.05in]{geometry}
 
 \begin{document}
-
-% Bordure autour de la carte
-\begin{tikzpicture}[remember picture,overlay]
-     \draw[line width=2pt, black]
-       ($(current page.south west)+(0.1in,0.05in)$) rectangle
-       ($(current page.north east)-(0.1in,0.05in)$);
-\end{tikzpicture}
 
 \centering \includegraphics[width=.2\linewidth]{hero.png}\\[1pt]
 \parbox{2in}{\Large \centering \textbf{Gabriel Bruyère}\\[1pt]
