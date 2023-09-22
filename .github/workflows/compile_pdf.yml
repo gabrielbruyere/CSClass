@@ -3,13 +3,18 @@ on: [push]
 jobs:
   build_latex:
     runs-on: ubuntu-latest
-    container:
-      image: blang/latex:ubuntu
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v3
+
+      - name: Install XeTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-xetex
+
       - name: Compile LaTeX document
         run: xelatex card.tex
+
       - name: Upload PDF file
         uses: actions/upload-artifact@v3
         with:
