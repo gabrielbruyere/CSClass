@@ -1,5 +1,8 @@
 name: Build LaTeX document
-on: [push]
+on:
+  push:
+    tags:
+      - '*'
 jobs:
   build_latex:
     runs-on: ubuntu-latest
@@ -7,16 +10,14 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v3
 
-      - name: Install XeTeX
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y texlive-xetex
-
       - name: Compile LaTeX document
-        run: xelatex card.tex
-
-      - name: Upload PDF file
-        uses: actions/upload-artifact@v3
+        uses: xu-cheng/latex-action@v3
         with:
-          name: PDF
-          path: card.pdf
+          root_file: card.tex
+          latexmk_use_xelatex: true
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: card.pdf
+          token: ${{ secrets.EZPRIT }}
